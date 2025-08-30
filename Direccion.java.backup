@@ -1,0 +1,159 @@
+package usuarios.usuarios.model;
+
+public class Direccion {
+    private Long id;
+    private String calle;
+    private String numero;
+    private String comuna;
+    private String ciudad;
+    private String region;
+    private String codigoPostal;
+    private Boolean esDespacho;
+    private Long usuarioId;
+    private String referencia;
+
+    // Constructor por defecto
+    public Direccion() {
+        this.esDespacho = true;
+    }
+
+    // Constructor completo
+    public Direccion(Long id, String calle, String numero, String comuna, String ciudad, 
+                     String region, String codigoPostal, Boolean esDespacho, Long usuarioId) {
+        this.id = id;
+        this.calle = calle;
+        this.numero = numero;
+        this.comuna = comuna;
+        this.ciudad = ciudad;
+        this.region = region;
+        this.codigoPostal = codigoPostal;
+        this.esDespacho = esDespacho;
+        this.usuarioId = usuarioId;
+    }
+
+    // Constructor simplificado
+    public Direccion(Long id, String calle, String numero, String comuna, 
+                     String ciudad, String region, Long usuarioId) {
+        this(id, calle, numero, comuna, ciudad, region, null, true, usuarioId);
+    }
+
+    // Getters y Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getComuna() {
+        return comuna;
+    }
+
+    public void setComuna(String comuna) {
+        this.comuna = comuna;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
+
+    public Boolean getEsDespacho() {
+        return esDespacho;
+    }
+
+    public void setEsDespacho(Boolean esDespacho) {
+        this.esDespacho = esDespacho;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
+    }
+
+    // Métodos de utilidad
+    public String getDireccionCompleta() {
+        StringBuilder direccionCompleta = new StringBuilder();
+        if (calle != null) direccionCompleta.append(calle);
+        if (numero != null) direccionCompleta.append(" ").append(numero);
+        if (comuna != null) direccionCompleta.append(", ").append(comuna);
+        if (ciudad != null) direccionCompleta.append(", ").append(ciudad);
+        if (region != null) direccionCompleta.append(", ").append(region);
+        return direccionCompleta.toString();
+    }
+
+    public boolean esValidaParaDespacho() {
+        return calle != null && !calle.trim().isEmpty() &&
+               numero != null && !numero.trim().isEmpty() &&
+               comuna != null && !comuna.trim().isEmpty() &&
+               ciudad != null && !ciudad.trim().isEmpty() &&
+               region != null && !region.trim().isEmpty() &&
+               esDespacho;
+    }
+
+    // Constantes para regiones de Chile
+    public static class Regiones {
+        public static final String METROPOLITANA = "Región Metropolitana";
+        public static final String VALPARAISO = "Región de Valparaíso";
+        public static final String BIOBIO = "Región del Biobío";
+        public static final String ARAUCANIA = "Región de La Araucanía";
+        public static final String LOS_LAGOS = "Región de Los Lagos";
+    }
+
+    @Override
+    public String toString() {
+        return "Direccion{" +
+                "id=" + id +
+                ", direccionCompleta='" + getDireccionCompleta() + '\'' +
+                ", esDespacho=" + esDespacho +
+                ", usuarioId=" + usuarioId +
+                '}';
+    }
+}
