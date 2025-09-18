@@ -1,63 +1,26 @@
-# Microservicio de Usuarios
+# Microservicio de Gestión de Usuarios
 
-Sistema básico de gestión de usuarios.
-
-## Información del Proyecto
-- **Framework**: Spring Boot 3.5.5
-- **Lenguaje**: Java 17
-- **Puerto**: 8080 (por defecto)
-- **Tipo**: Microservicio REST con datos en memoria
-
-
-## Datos en Memoria
+Sistema de microservicios desarrollado con Spring Boot para la gestión completa de usuarios.
 
 ### Usuarios
-1. Juan Pérez (ADMIN)
-2. María González (CLIENTE) 
-3. Carlos Rodríguez (VENDEDOR)
-4. Ana López (CLIENTE)
-5. Pedro Martínez (CLIENTE)
-6. Laura Fernández (VENDEDOR)
-7. Miguel Torres (CLIENTE) 
-8. Carmen Silva (ADMIN)
+- `GET /usuarios` - Obtener todos los usuarios
+- `GET /usuarios/{id}` - Obtener usuario por ID
+- `GET /usuarios/activos` - Obtener usuarios activos
+- `GET /usuarios/rol/{rol}` - Obtener usuarios por rol
+- `POST /usuarios` - Crear nuevo usuario
+- `PUT /usuarios/{id}` - Actualizar usuario
+- `DELETE /usuarios/{id}` - Eliminar usuario
 
-
-### Usuarios (`/usuarios`)
-- `GET /usuarios` - Listar todos los usuarios
-- `GET /usuarios/{id}` - Usuario por ID
-- `GET /usuarios/activos` - Solo usuarios activos
-
-## Modelo de Datos
-
-### Usuario
-- **id**: Long - Identificador único
-- **nombre**: String - Nombre completo
-- **email**: String - Correo electrónico
-- **telefono**: String - Número de teléfono
-- **rol**: String - Rol del usuario (ADMIN, CLIENTE, VENDEDOR)
-- **fechaRegistro**: LocalDateTime - Fecha de registro
-- **activo**: Boolean - Estado del usuario
-
-## Ejecutar el Microservicio
-
-1. Ejecutar: `mvn spring-boot:run`
-2. Acceder: `http://localhost:8080`
-
-## Ejemplos de Uso
-
-### Listar todos los usuarios
-```
-GET http://localhost:8080/usuarios
+### Ejecutar la aplicación
+```bash
+mvn clean install
+mvn spring-boot:run
 ```
 
-### Usuario específico
-```
-GET http://localhost:8080/usuarios/1
-```
+La aplicación disponible en: `http://localhost:8080`
 
-### Solo usuarios activos
-```
-GET http://localhost:8080/usuarios/activos
-```
+## Testing
+
+Se incluye una colección de POSTMAN (`postman_simple.json`) con todas las pruebas de los endpoints.
 
 

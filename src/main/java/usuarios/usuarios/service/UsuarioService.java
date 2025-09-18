@@ -1,52 +1,60 @@
 package usuarios.usuarios.service;
 
 import usuarios.usuarios.model.Usuario;
+import usuarios.usuarios.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
-import java.util.*;
+import jakarta.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
-    
-    private List<Usuario> usuarios;
 
-    public UsuarioService() {
-        inicializarDatos();
-    }
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-    private void inicializarDatos() {
-        // Inicializar usuarios
-        usuarios = new ArrayList<>();
-        usuarios.add(new Usuario(1L, "Juan Pérez", "juan.perez@email.com", "987654321", "ADMIN"));
-        usuarios.add(new Usuario(2L, "María González", "maria.gonzalez@email.com", "987654322", "CLIENTE"));
-        usuarios.add(new Usuario(3L, "Carlos Rodríguez", "carlos.rodriguez@email.com", "987654323", "VENDEDOR"));
-        usuarios.add(new Usuario(4L, "Ana López", "ana.lopez@email.com", "987654324", "CLIENTE"));
-        usuarios.add(new Usuario(5L, "Pedro Martínez", "pedro.martinez@email.com", "987654325", "CLIENTE"));
-        usuarios.add(new Usuario(6L, "Laura Fernández", "laura.fernandez@email.com", "987654326", "VENDEDOR"));
-        usuarios.add(new Usuario(7L, "Miguel Torres", "miguel.torres@email.com", "987654327", "CLIENTE"));
-        usuarios.add(new Usuario(8L, "Carmen Silva", "carmen.silva@email.com", "987654328", "ADMIN"));
-
-        // Configurar algunas fechas diferentes y estados
-        usuarios.get(1).setFechaRegistro(LocalDateTime.now().minusDays(30));
-        usuarios.get(2).setFechaRegistro(LocalDateTime.now().minusDays(15));
-        usuarios.get(7).setActivo(false); // Un usuario inactivo para demostrar el filtro
-    }
-
-    // Métodos para usuarios
+    // Obtener todos los usuarios
     public List<Usuario> obtenerTodosLosUsuarios() {
-        return new ArrayList<>(usuarios);
+        return usuarioRepository.findAll();
     }
 
-    public Usuario buscarUsuarioPorId(Long id) {
-        return usuarios.stream()
-                .filter(usuario -> usuario.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+    // Buscar usuario por ID
+    public Optional<Usuario> buscarUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id);
     }
 
+    // Obtener usuarios activos
     public List<Usuario> obtenerUsuariosActivos() {
-        return usuarios.stream()
-                .filter(Usuario::getActivo)
-                .toList();
+        return usuarioRepository.findByActivoTrue();
+    }
+    
+    // Obtener usuarios por rol
+    public List<Usuario> obtenerUsuariosPorRol(String rol) {
+        return usuarioRepository.findByRol(rol);
+    }
+
+    // Crear nuevo usuario
+    public Usuario crearUsuario(@Valid Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    // Actualizar usuario
+    public Usuario actualizarUsuario(Long id, @Valid Usuario usuarioActualizado) {
+        Optional<Usuario> usuarioExistente = usuarioRepository.findById(id);
+        if (usuarioExistente.isPresent()) {
+            Usuario usuario = usuarioExistente.get();
+            usuario.setNombre(usuarioActualizado.getNombre());
+            usuario.setEmail(usuarioActualizado.getEmail());
+            usuario.setTelefono(usuarioActualizado.getTelefono());
+            usuario.setRol(usuarioActualizado.getRol());
+            return usuarioRepository.save(usuario);
+        }
+        throw new RuntimeException("Usuario no encontrado con ID: " + id);
+    }
+
+    // Eliminar usuario
+    public void eliminarUsuario(Long id) {
+        usuarioRepository.deleteById(id);
     }
 }

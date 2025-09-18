@@ -1,14 +1,38 @@
 package usuarios.usuarios.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "USUARIOS")
 public class Usuario {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq")
+    @SequenceGenerator(name = "usuario_seq", sequenceName = "USUARIO_SEQ", allocationSize = 1)
+    @Column(name = "ID")
     private Long id;
+    
+    @NotBlank(message = "El nombre es obligatorio")
+    @Column(name = "NOMBRE", nullable = false)
     private String nombre;
+    
+    @NotBlank(message = "El email es obligatorio")
+    @Email(message = "Debe ser un email válido")
+    @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
+    
+    @Column(name = "TELEFONO")
     private String telefono;
+    
+    @Column(name = "ROL")
     private String rol;
+    
+    @Column(name = "FECHA_REGISTRO")
     private LocalDateTime fechaRegistro;
+    
+    @Column(name = "ACTIVO")
     private Boolean activo;
 
     // Constructor por defecto
