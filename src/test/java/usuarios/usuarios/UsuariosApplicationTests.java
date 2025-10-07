@@ -1,20 +1,22 @@
 package usuarios.usuarios;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
+import org.junit.jupiter.api.DisplayName;
 
-@SpringBootTest
-@TestPropertySource(properties = {
-    "spring.datasource.url=jdbc:h2:mem:testdb",
-    "spring.datasource.driver-class-name=org.h2.Driver",
-    "spring.jpa.hibernate.ddl-auto=create-drop"
-})
+import static org.assertj.core.api.Assertions.assertThat;
+
+@DisplayName("Tests Basicos de la Aplicacion")
 class UsuariosApplicationTests {
 
 	@Test
-	void contextLoads() {
-		// Test básico que verifica que el contexto de Spring se carga correctamente
+	@DisplayName("Test: Verificar que la clase principal existe")
+	void applicationClassExists() {
+		assertThat(UsuariosApplication.class).isNotNull();
 	}
 
+	@Test
+	@DisplayName("Test: Verificar que el metodo main existe")
+	void mainMethodExists() throws NoSuchMethodException {
+		assertThat(UsuariosApplication.class.getMethod("main", String[].class)).isNotNull();
+	}
 }

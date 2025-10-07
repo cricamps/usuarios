@@ -2,6 +2,7 @@ package usuarios.usuarios.service;
 
 import usuarios.usuarios.model.Usuario;
 import usuarios.usuarios.repository.UsuarioRepository;
+import usuarios.usuarios.exception.UsuarioNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jakarta.validation.Valid;
@@ -50,11 +51,14 @@ public class UsuarioService {
             usuario.setRol(usuarioActualizado.getRol());
             return usuarioRepository.save(usuario);
         }
-        throw new RuntimeException("Usuario no encontrado con ID: " + id);
+        throw new UsuarioNotFoundException(id);
     }
 
     // Eliminar usuario
     public void eliminarUsuario(Long id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new UsuarioNotFoundException(id);
+        }
         usuarioRepository.deleteById(id);
     }
 }

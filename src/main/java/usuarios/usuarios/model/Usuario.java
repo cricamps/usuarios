@@ -3,10 +3,11 @@ package usuarios.usuarios.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
+import org.springframework.hateoas.RepresentationModel;
 
 @Entity
 @Table(name = "USUARIOS")
-public class Usuario {
+public class Usuario extends RepresentationModel<Usuario> {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq")
@@ -106,17 +107,5 @@ public class Usuario {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", email='" + email + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", rol='" + rol + '\'' +
-                ", activo=" + activo +
-                '}';
     }
 }
