@@ -299,36 +299,6 @@ DELETE http://localhost:8080/usuarios/1
 
 ---
 
-## 🎬 Grabación del Video (Kaltura)
-
-### Puntos a mostrar en el video:
-
-1. **Despliegue en Cloud**
-   - Mostrar Docker Lab con el contenedor corriendo
-   - Mostrar la URL pública funcionando
-
-2. **Pruebas con POSTMAN**
-   - GET todos los usuarios (mostrar enlaces HATEOAS)
-   - GET usuario por ID (mostrar enlaces HATEOAS)
-   - POST crear nuevo usuario
-   - PUT actualizar usuario
-   - DELETE eliminar usuario
-
-3. **Conexión a Oracle Cloud**
-   - Mostrar SQL Developer conectado a la BD
-   - Mostrar los registros en la tabla USUARIOS
-   - Mostrar que los cambios desde POSTMAN se reflejan en la BD
-
-4. **Pruebas Unitarias**
-   - Ejecutar `./mvnw test` en la terminal
-   - Mostrar que todas las pruebas pasan exitosamente
-   - Mostrar el reporte de cobertura
-
-5. **Documentación HATEOAS**
-   - Mostrar en POSTMAN los enlaces _links en las respuestas
-   - Explicar brevemente cómo navegar usando los enlaces
-
----
 
 ## 📊 Base de Datos
 

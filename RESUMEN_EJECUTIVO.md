@@ -75,34 +75,3 @@ docker-compose up
 3. docker-compose up -d
 4. Obtener URL publica puerto 8080
 
-### PASO 6: Grabar Video
-
-Mostrar:
-- Docker Lab con contenedor corriendo
-- POSTMAN con URL publica (enlaces HATEOAS)
-- SQL Developer con datos Oracle Cloud
-- Terminal ejecutando pruebas unitarias
-- Explicar enlaces HATEOAS
-
-### PASO 7: Preparar Entrega
-
-ZIP con: src/, Wallet/, pom.xml, Dockerfile, docker-compose.yml, README.md, SQL
-Links: GitHub, Trello, Video Kaltura
-
-## VERIFICACION FINAL
-
-- 12 pruebas unitarias pasan
-- HATEOAS funciona (enlaces _links)
-- Microservicio en Docker Lab
-- Video grabado
-- ZIP creado
-- Links preparados
-
-## ARCHIVOS IMPORTANTES
-
-- CHECKLIST_ACTIVIDAD.md - Pasos detallados
-- README.md - Documentacion completa
-- src/main/java/usuarios/usuarios/controller/UsuarioController.java - HATEOAS
-- src/test/ - Pruebas unitarias
-
-TODO ESTA LISTO - SOLO SIGUE EL CHECKLIST
